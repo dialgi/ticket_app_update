@@ -11,6 +11,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\HomeController;
 
+use App\Http\Controllers\Admin\LokasiController;
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/events/{event}', [UserEventController::class, 'show'])->name('events.show');
@@ -31,10 +33,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('categories', CategoryController::class);
 
         // Event Management
-        Route::resource('events', EventController::class);
+        Route::resource('events', AdminEventController::class);
 
         
         Route::resource('tickets', TiketController::class);
+
+        Route::resource('lokasi', LokasiController::class);
 
 
         Route::get('/histories', [HistoriesController::class, 'index'])->name('histories.index');

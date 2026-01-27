@@ -65,12 +65,21 @@
                         <label class="label">
                             <span class="label-text font-semibold">Lokasi</span>
                         </label>
-                        <input
-                            type="text"
-                            name="lokasi"
-                            placeholder="Contoh: Stadion Utama"
-                            class="input input-bordered w-full"
-                            required />
+                        
+                        <select name="lokasi" class="select select-bordered w-full" required>
+                            <option value="" disabled selected>Pilih Lokasi yang Tersedia</option>
+                            
+                            @foreach ($lokasis as $l)
+                                {{-- value harus menggunakan nama_lokasi agar dibaca sebagai teks oleh database --}}
+                                <option value="{{ $l->nama_lokasi }}" {{ old('lokasi') == $l->nama_lokasi ? 'selected' : '' }}>
+                                    {{ $l->nama_lokasi }}
+                                </option>
+                            @endforeach
+                        </select>
+                        
+                        @error('lokasi')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Kategori -->

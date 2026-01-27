@@ -37,12 +37,22 @@
                     </div>
 
                     <!-- Lokasi -->
-                    <div class="form-control">
+                    <div class="form-control mb-4">
                         <label class="label">
-                            <span class="label-text font-semibold">Lokasi</span>
+                            <span class="label-text font-semibold">Lokasi Event</span>
                         </label>
-                        <input type="text" name="lokasi" placeholder="Contoh: Stadion Utama"
-                            class="input input-bordered w-full" value="{{ $event->lokasi }}" required />
+                        <select name="lokasi" class="select select-bordered w-full @error('lokasi') select-error @enderror" required>
+                            <option value="" disabled>Pilih Lokasi yang Tersedia</option>
+                            @foreach ($lokasis as $l)
+                                <option value="{{ $l->nama_lokasi }}" 
+                                    {{ (old('lokasi', $event->lokasi) == $l->nama_lokasi) ? 'selected' : '' }}>
+                                    {{ $l->nama_lokasi }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('lokasi')
+                            <span class="text-error text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
                     <!-- Kategori -->
